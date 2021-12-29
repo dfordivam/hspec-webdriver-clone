@@ -1,14 +1,14 @@
-name:              hspec-webdriver
+name:              hspec-webdriver-clone
 version:           1.2.1
 cabal-version:     >= 1.8
 build-type:        Simple
 synopsis:          Write end2end web application tests using webdriver and hspec
 category:          Web
 author:            John Lenz <lenz@math.uic.edu>
-maintainer:        John Lenz <lenz@math.uic.edu>
+maintainer:        Divam <dfordvm@pm.me>
 license:           MIT
 license-file:      LICENSE
-homepage:          https://bitbucket.org/wuzzeb/webdriver-utils
+homepage:          https://github.com/dfordivam/hspec-webdriver-clone
 stability:         Experimental
 description:       For end to end testing of web applications from Haskell, the 
                    <https://hackage.haskell.org/package/webdriver webdriver> package is a great tool but just
@@ -19,8 +19,8 @@ extra-source-files: README.md
                     Changelog.md
 
 source-repository head
-    type: mercurial
-    location: https://bitbucket.org/wuzzeb/webdriver-utils
+  type: git
+  location: https://github.com/dfordivam/hspec-webdriver-clone
 
 library
     hs-source-dirs:  .
