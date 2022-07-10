@@ -458,7 +458,7 @@ instance Eq multi => Example (WdExample multi) where
 traverseTree :: Applicative f => (Item a -> f (Item b)) -> SpecTree a -> f (SpecTree b)
 traverseTree f (Leaf i) = Leaf <$> f i
 traverseTree f (Node msg ss) = Node msg <$> traverse (traverseTree f) ss
-traverseTree f (NodeWithCleanup c ss) = NodeWithCleanup c' <$> traverse (traverseTree f) ss
+traverseTree f (NodeWithCleanup loc c ss) = NodeWithCleanup loc c' <$> traverse (traverseTree f) ss
     where
         c' _b = c undefined -- this undefined is OK since we do not export the definition of WdTestSession
                             -- so the user cannot do anything with the passed in value to 'afterAll'
