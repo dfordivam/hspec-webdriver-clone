@@ -34,8 +34,8 @@ library
                  , aeson                >= 0.8
                  , data-default         >= 0.5
                  , hashable             >= 1.2
-                 , hspec-core           >= 2.0
-                 , hspec                >= 2.0
+                 , hspec-core           >= 2.0 && < 2.8
+                 , hspec                >= 2.0 && < 2.8
                  , lifted-base          >= 0.2
                  , stm                  >= 2.4
                  , text                 >= 0.11
