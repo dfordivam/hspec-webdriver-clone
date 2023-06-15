@@ -458,21 +458,28 @@ instance Eq multi => Example (WdExample multi) where
 --- Utils
 --------------------------------------------------------------------------------
 
+#if MIN_VERSION_hspec_core(2,10,0)
+traverseSpec :: Applicative f => (Item a -> f (Item b)) -> [SpecTree a] -> f [SpecTree b]
+traverseSpec = traverse . traverse
+
+#else
 -- | Traverse a spec allowing the type to change
 traverseTree :: Applicative f => (Item a -> f (Item b)) -> SpecTree a -> f (SpecTree b)
 traverseTree f (Leaf i) = Leaf <$> f i
 traverseTree f (Node msg ss) = Node msg <$> traverse (traverseTree f) ss
-#if MIN_VERSION_hspec_core(2,10,0)
-traverseTree f (NodeWithCleanup c x ss) = NodeWithCleanup c x <$> traverse (traverseTree f) ss
+#if MIN_VERSION_hspec_core(2,8,0)
+traverseTree f (NodeWithCleanup loc c ss) = NodeWithCleanup loc c' <$> traverse (traverseTree f) ss
 #else
 traverseTree f (NodeWithCleanup c ss) = NodeWithCleanup c' <$> traverse (traverseTree f) ss
+#endif
     where
         c' _b = c undefined -- this undefined is OK since we do not export the definition of WdTestSession
                             -- so the user cannot do anything with the passed in value to 'afterAll'
-#endif
 
 traverseSpec :: Applicative f => (Item a -> f (Item b)) -> [SpecTree a] -> f [SpecTree b]
 traverseSpec f = traverse (traverseTree f)
+#endif
+
 
 -- | Process the items in a depth-first walk, passing in the item counter value.
 mapWithCounter :: (Int -> Item a -> Item b) -> [SpecTree a] -> [SpecTree b]
