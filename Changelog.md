@@ -1,3 +1,7 @@
+## 1.2.2
+
+* Fix build with hspec >= 2.10
+
 ## 1.2.1
 
 * Fix build with hspec >= 2.5
